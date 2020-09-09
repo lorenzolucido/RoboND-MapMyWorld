@@ -11,9 +11,9 @@ ros::Publisher motor_command_publisher;
 // After publishing the requested velocities, a message feedback should be returned with the requested wheel velocities
 bool handle_drive_request(ball_chaser::DriveToTarget::Request& req,
     ball_chaser::DriveToTarget::Response& res)
-{
+{ 
     ROS_INFO("DriveToTargetRequest received - lin_x:%1.2f, ang_z:%1.2f", (float)req.linear_x, (float)req.angular_z);
-
+      
     // Check if requested joint angles are in the safe zone, otherwise clamp them
     // std::vector<float> joints_angles = clamp_at_boundaries(req.joint_1, req.joint_2);
 
@@ -24,7 +24,7 @@ bool handle_drive_request(ball_chaser::DriveToTarget::Request& req,
 		//geometry_msgs::Vector3 angular = geometry_msgs::Vector3(0., 0., 0.);
     geometry_msgs::Twist to_publish;
     to_publish.linear.x = (float)req.linear_x; 
-    to_publish.angular.z = (float)req.angular_z; ;
+    to_publish.angular.z = (float)req.angular_z;
 		
     //joint1_angle.data = joints_angles[0];
     //joint2_angle.data = joints_angles[1];

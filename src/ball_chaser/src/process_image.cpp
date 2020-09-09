@@ -5,6 +5,9 @@
 // Define a global client that can request services
 ros::ServiceClient client;
 
+// Global last action - 0: No Action, 1: Drive Forward, 2: Drive Left, 3: Drive Right
+uint last_action = 0;
+
 // This function calls the command_robot service to drive the robot in the specified direction
 void drive_robot(float lin_x, float ang_z)
 {
@@ -19,30 +22,22 @@ void drive_robot(float lin_x, float ang_z)
 
 // This callback function continuously executes and reads the image data
 void process_image_callback(const sensor_msgs::Image img)
-{
-
+{    
     int white_pixel = 255;
-		int img_length = img.height * img.step;
+		int img_length = img.height * img.width;
 		bool ball_detected = false;
-
+    
     // TODO: Loop through each pixel in the image and check if there's a bright white one
     // Then, identify if this pixel falls in the left, mid, or right side of the image
     // Depending on the white ball position, call the drive_bot function and pass velocities to it
-    // Request a stop when there's no white ball seen by the camera
+    // Request a stop when there's no white ball seen by the camera        
     for (int i = 0; i < img_length; i++) {
-        if (img.data[i] == white_pixel) {
-            ball_detected = true;            
-            float image_portion = (float)i / (float)img_length;
-            /*
-            if (image_portion > 0.66) {
-            	drive_robot(0.5, 0.5);
-            } else if (image_portion > 0.33) {
-            	drive_robot(0.5, 0.0);
-            } else {
-            	drive_robot(0.5, -0.5);
-            } 
-            */
-            drive_robot(0.5, image_portion-0.5);           
+        int R = 3*i, G = 3*i+1, B = 3*i+2;
+        if (img.data[R] == white_pixel && img.data[G] == white_pixel && img.data[B] == white_pixel) {
+            
+            ball_detected = true;                       
+            float image_portion = (float)i / (float)img_length;                        
+            drive_robot(0.5, image_portion-0.5);
             break;
         }
     }
