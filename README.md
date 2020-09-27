@@ -1,21 +1,26 @@
-# RoboND - Where Am I
-Repository for the third project of the Robotics Software Engineer nanodegree program: Where Am I
+# RoboND - Map My World
+Repository for the fourth project of the Robotics Software Engineer nanodegree program: Map My World
 
-In this project, we use Monte-Carlo Localization (MCL), also known as the particle filter, to localize our robot in its environment. We use the ROS AMCL package for this purpose.
+In this project, we use a specific implementation of GraphSLAM, RTAB-Map, to simultaneously construct the map of the robot environment and localize it. 
 
-Steps for this project:
-- [x] Set up simulation environment
-- [x] Generate ground truth map from the gazebo world (using `pgm_map_creator` ros package)
-- [x] Set up the `amcl` ros package with a launch file and proper localization parameters
+## Project steps:
+- [x] Set up the simulation environment
+- [x] Ensure that the robot has the necessary sensors for RTAB-Map to work: odometry, laser scan & RGB camera
+- [x] Ensure that the world has enough features for GraphSLAM to work properly, it was important to add objects like boxes and pans to the base world
+- [x] Perform SLAM: Simulatneous Localization and Mapping
 
-The key parameters we have to set for the `amcl` package to work are:
-- *odom_model_type*: corrected_diff means we use the `sample_motion_model_odometry` algorithm from Probabilistic Robotics
-- *odom_alpha{1 to 4}*: model noise parameters
-- *max_particles*: maximum allowed number of particles
-- *laser_max_beams*: how many evenly-spaced beams in each scan to be used when updating the filter.
 
-With our current set of parameters the robot quickly manages to locate itself, see the below screenshot:
+## Running the scripts
+- launch the world: `roslaunch my_robot world.launch`
+- start the teleop script in order to move the robot around with the keyboard: `rosrun teleop_twist_keyboard teleop_twist_keyboard.py`
+- launch the RTAB-Map node: `roslaunch my_robot mapping.launch`
 
-![mcl](MonteCarloLocalization.PNG)
+## Results
+
+With our current set of parameters the robot manages to perform SLAM in a pretty efficient way, the below screenshots show the reconstructed 3D map, occupancy grid & graph view from `rtabmap-databaseViewer`:
+
+![3DMap](3DMap_LoloWorld.png)
+![occGrid](OccupancyGrid_LoloWorld.png)
+![graphView](Graph_View_LoloWorld.png)
  
 

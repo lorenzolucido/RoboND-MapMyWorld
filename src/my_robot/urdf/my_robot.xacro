@@ -179,6 +179,16 @@
     <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
+
+  <!-- Sensor Upgrade [MapMyWorld] -->
+  <joint name="camera_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.5707 0 -1.5707"/>
+    <parent link="camera"/>
+    <child link="camera_link_optical"/>
+  </joint>
+
+  <link name="camera_link_optical">
+  </link>
   
   <!-- Lidar (hokuyo ?) -->
   <link name="hokuyo">
@@ -215,6 +225,8 @@
     <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
+
+  
 
 	<!-- Colors -->
 	<gazebo reference="left_wheel">
