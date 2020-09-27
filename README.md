@@ -19,8 +19,8 @@ In this project, we use a specific implementation of GraphSLAM, RTAB-Map, to sim
 
 With our current set of parameters the robot manages to perform SLAM in a pretty efficient way, the below screenshots show the reconstructed 3D map, occupancy grid & graph view from `rtabmap-databaseViewer`:
 
-![3DMap](3DMap_LoloWorld.png)
-![occGrid](OccupancyGrid_LoloWorld.png)
-![graphView](Graph_View_LoloWorld.png)
+![3DMap](3DMap_Lolo_World.png)
+![occGrid](OccupancyGrid_Lolo_World.png)
+![graphView](Graph_View_Lolo_World.png)
  
 
