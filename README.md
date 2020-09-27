@@ -21,6 +21,6 @@ With our current set of parameters the robot manages to perform SLAM in a pretty
 
 ![3DMap](3DMap_Lolo_World.png)
 ![occGrid](OccupancyGrid_Lolo_World.png)
-![graphView](Graph_View_Lolo_World.png)
+![graphView](GraphView_Lolo_World.png)
  
 
